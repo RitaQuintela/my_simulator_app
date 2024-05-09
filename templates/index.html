@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulator</title>
+    <title>Tuition Simulator</title>
 </head>
 <body>
-    <h1>Value Simulator</h1>
-    <form method="POST">
-        <label for="userInput">Enter your value:</label>
-        <input type="text" id="userInput" name="userInput">
-        <button type="submit">Submit</button>
+    <h1>Tuition Simulator</h1>
+    <form action="/get_tuition" method="post">
+        <label for="programName">Enter Program Name:</label>
+        <input type="text" id="programName" name="programName">
+        <button type="submit">Get Tuition</button>
     </form>
-    {% if result %}
-    <div id="result">The output is: {{ result }}</div>
-    {% endif %}
+    <p id="tuitionAmount"></p>
 </body>
 </html>

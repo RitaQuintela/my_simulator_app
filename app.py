@@ -1,25 +1,23 @@
-from flask import Flask, render_template, request
-import openpyxl
+from flask import Flask, request, render_template, jsonify
 
 app = Flask(__name__)
 
-# Load the workbook and select the active worksheet
-workbook = openpyxl.load_workbook('your_file.xlsx')
-sheet = workbook.active
+# Simulated tuition data (replace with your actual data)
+tuition_data = {
+    'Computer Science': 10000,
+    'Business Administration': 8000,
+    # Add more program-tuition pairs as needed
+}
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
-    if request.method == 'POST':
-        user_input = request.form['userInput']
-        result = simulate(user_input)
-        return render_template('index.html', result=result)
-    return render_template('index.html', result=None)
+    return render_template('index.html')
 
-def simulate(user_input):
-    for row in sheet.iter_rows(min_row=2):  # Assuming the first row is the header
-        if row[0].value == user_input:
-            return row[1].value
-    return "No match found."
+@app.route('/get_tuition', methods=['POST'])
+def get_tuition():
+    program_name = request.form.get('programName')
+    tuition = tuition_data.get(program_name, 'Program not found')
+    return jsonify({'tuition': tuition})
 
 if __name__ == '__main__':
     app.run(debug=True)
