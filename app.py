@@ -1,23 +1,17 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask
 
 app = Flask(__name__)
 
-# Simulated tuition data (replace with your actual data)
-tuition_data = {
-    'Computer Science': 10000,
-    'Business Administration': 8000,
-    # Add more program-tuition pairs as needed
-}
-
 @app.route('/')
 def index():
-    return render_template('index.html')
+    # Your main route logic here
+    return "Welcome to My Simulator App!"
 
-@app.route('/get_tuition', methods=['POST'])
+@app.route('/get_tuition')
 def get_tuition():
-    program_name = request.form.get('programName')
-    tuition = tuition_data.get(program_name, 'Program not found')
-    return jsonify({'tuition': tuition})
+    # Handle the /get_tuition route
+    # You can return relevant data or render an HTML template
+    return "Tuition information goes here"
 
 if __name__ == '__main__':
     app.run(debug=True)
