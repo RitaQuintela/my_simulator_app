@@ -1,13 +1,17 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    # Your main route logic here
-    return "Welcome to My Simulator App!"
+    if request.method == 'POST':
+        # Your POST route logic here
+        return "Welcome to My Simulator App! (POST)"
+    else:
+        # Your main route logic here
+        return "Welcome to My Simulator App! (GET)"
 
-@app.route('/get_tuition')
+@app.route('/get_tuition', methods=['POST'])
 def get_tuition():
     # Handle the /get_tuition route
     # You can return relevant data or render an HTML template
